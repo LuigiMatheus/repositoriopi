@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Temperatura e Umidade</title>
+    <!-- Link para o Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- CSS para estilizar a página -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .chart-container {
+            width: 80%;
+            margin-bottom: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Dashboard de Temperatura e Umidade</h1>
+
+    <!-- Gráfico de Linhas -->
+    <div class="chart-container">
+        <canvas id="lineChart"></canvas>
+    </div>
+
+    <!-- Gráfico de Barras -->
+    <div class="chart-container">
+        <canvas id="barChart"></canvas>
+    </div>
+
+    <!-- Script para os gráficos -->
+    <script>
+        // Dados para o gráfico de linhas (Temperatura e Umidade por Horário)
+        const lineChartData = {
+            labels: ['12:00', '13:00', '14:00', '15:00', '16:00', '17:00'],
+            datasets: [
+                {
+                    label: 'Temperatura (°C)',
+                    data: [30, 29, 28, 25, 22, 23],
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderWidth: 1,
+                    fill: true
+                },
+                {
+                    label: 'Umidade (%)',
+                    data: [80, 82, 80, 85, 80, 83],
+                    borderColor: 'rgba(153, 102, 255, 1)',
+                    backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                    borderWidth: 1,
+                    fill: true
+                }
+            ]
+        };
+
+        const lineChartConfig = {
+            type: 'line',
+            data: lineChartData,
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        };
+
+        const lineChartCtx = document.getElementById('lineChart').getContext('2d');
+        new Chart(lineChartCtx, lineChartConfig);
+
+        // Dados para o gráfico de barras (Temperatura e Umidade Média por Mês)
+        const barChartData = {
+            labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho'],
+            datasets: [
+                {
+                    label: 'Temperatura Média (°C)',
+                    data: [22, 24, 27, 23, 20, 18],
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Umidade Média (%)',
+                    data: [90, 89, 93, 87, 88, 82],
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }
+            ]
+        };
+
+        const barChartConfig = {
+            type: 'bar',
+            data: barChartData,
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        };
+
+        const barChartCtx = document.getElementById('barChart').getContext('2d');
+        new Chart(barChartCtx, barChartConfig);
+    </script>
+
+</body>
+</html>
